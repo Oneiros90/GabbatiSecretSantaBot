@@ -290,9 +290,9 @@ def update_secret_santa_message(context: CallbackContext, santa: SecretSanta):
     elif santa.started:
         participants_list = gen_participants_list(santa.participants)
 
-        base_text = '{santa} This Secret Santa has been started and everyone ' \
-                    '<a href="{bot_link}">received their match</a>!\n' \
-                    'Participants list:\n\n' \
+        base_text = '{santa} OH OH OH bambini, questo Secret Santa è stato avviato e tutti hanno ricevuto ' \
+                    '<a href="{bot_link}">il loro match segreto</a>!\n' \
+                    'Lista dei partecipanti:\n\n' \
                     '{participants}'
 
         text = base_text.format(
@@ -603,7 +603,7 @@ def on_match_button(update: Update, context: CallbackContext, santa: Optional[Se
         present_receiver_name = santa.get_user_name(present_receiver_id)
         present_receiver_mention = utilities.mention_escaped_by_id(present_receiver_id, present_receiver_name)
 
-        text = f"{Emoji.SANTA}{Emoji.PRESENT} You are {present_receiver_mention}'s <a href=\"{santa.link()}\">Secret Santa</a>!"
+        text = f"{Emoji.SANTA}{Emoji.PRESENT} Sei il <a href=\"{santa.link()}\">Secret Santa</a> di {present_receiver_mention}! {Emoji.COOL}{Emoji.GAMING}"
 
         match_message = context.bot.send_message(santa_id, text)
         santa.set_user_match_message_id(santa_id, match_message.message_id)
@@ -615,7 +615,7 @@ def on_match_button(update: Update, context: CallbackContext, santa: Optional[Se
 
     save_recently_started_santa(context.bot_data, santa)
 
-    text = f"Everyone has received their match in their <a href=\"{BOT_LINK}\">private chats</a>!"
+    text = f"Tutti hanno ricevuto il proprio match in <a href=\"{BOT_LINK}\">chat privata</a>!"
     sent_message.edit_text(text)
 
     update_secret_santa_message(context, santa)

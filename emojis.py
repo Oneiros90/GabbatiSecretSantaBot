@@ -13,3 +13,5 @@ class Emoji:
     LIST = "📜"
     SAD = "😔"
     TRASH = "🗑"
+    COOL = "😎"
+    GAMING = "🤙"
