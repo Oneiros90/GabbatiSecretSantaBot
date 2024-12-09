@@ -479,15 +479,15 @@ def on_join_deeplink(update: Update, context: CallbackContext):
     context.dispatcher.chat_data[santa_chat_id][ACTIVE_SECRET_SANTA_KEY] = santa.dict()
 
     if santa.creator_id == update.effective_user.id:
-        wait_for_start_text = f"\nYou can start it anytime using the \"<b>start match</b>\" button in the group, " \
-                              f"once at least {config.santa.min_participants} people have joined"
+        wait_for_start_text = f"\nPuoi iniziarlo in qualsiasi momento premendo il tasto di \"<b>start</b>\" nel gruppo, " \
+                              f"dopo che si siano unite almeno {config.santa.min_participants} persone"
     else:
-        wait_for_start_text = f"Now wait for {santa.creator_name_escaped} to start it"
+        wait_for_start_text = f"Per ora devi aspettare che {santa.creator_name_escaped} avvii le assegnazioni"
 
     reply_markup = keyboards.joined_message(santa_chat_id)
     sent_message = update.message.reply_html(
-        f"{Emoji.TREE} You joined {santa.chat_title_escaped}'s {santa.inline_link('Secret Santa')}!\n"
-        f"{wait_for_start_text}. You will receive your match here, in this chat",
+        f"{Emoji.TREE} Ti sei unito al {santa.inline_link('Secret Santa')} di {santa.chat_title_escaped}!\n"
+        f"{wait_for_start_text}. Il destinatario del tuo regalo ti verrà assegnato qui in questa chat!",
         reply_markup=reply_markup
     )
 
